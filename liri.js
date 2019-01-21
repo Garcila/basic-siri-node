@@ -9,13 +9,15 @@ const moment = require(`moment`);
 const userInput = process.argv;
 const command = process.argv[2];
 console.log('the user input is ', userInput)
-console.log('the command is ',command)
+console.log('the command is ',userInput.slice(3).join(' '))
 
 const concert = (userInput) => {
-	let artist = userInput.length < 4 ? 'Bokassa' : userInput.splice(3, 1);
+	let artist = userInput.length < 4 ? 'Bokassa' : userInput.slice(3).join(' ');
 	let url = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${KEYS.bandsInTown.key}`;
+	console.log(url)
 	axios.get(url).then((res) => {
 		let data = res.data[0];
+		if(!data)return console.log(`Could not find the band ${artist}`)
 		let nextEvent = {
 			Band: data.lineup[0],
 			Venue: data.venue.name,
@@ -28,13 +30,14 @@ const concert = (userInput) => {
 };
 
 const song = (userInput) => {
-	let songTitle = userInput.length < 4 ? `La vie en rose` : userInput.splice(3, 1);
+	let songTitle = userInput.length < 4 ? `La vie en rose` : userInput.slice(3).join(' ');
 	const spotify = new Spotify({
 		id: KEYS.spotify.id,
 		secret: KEYS.spotify.secret
 	});
 	spotify.search({ type: `track`, query: `${songTitle}` }).then((res) => {
 		const data = res.tracks.items[0];
+		if(!data) return console.log(`Could not find the song or band named ${songTitle}`)
 		let songInfo = {
 			Artist: data.album.artists[0].name,
 			Song: data.name,
@@ -52,6 +55,7 @@ const movie = (userInput) => {
 	axios
 		.get(url)
 		.then((res) => {
+			if(!res.data.Title) return console.log(`Could not find the movie ${movieTitle}`)
 			let movie = res.data;
 			let movieInfo = {
 				Title: movie.Title,
