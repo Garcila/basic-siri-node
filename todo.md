@@ -28,4 +28,4 @@
 
 ## Bonus
 - [x] Output data to log.txt file
-- [ ] Refactor - refactor
+- [ ] Refactor
