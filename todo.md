@@ -24,8 +24,8 @@
 - [x] Display response in the terminal according to requirements
 - [ ] Create README.MD  
 - [ ] Handle multiple artists in spotify query
-- [ ] Do do-what-it-says
-  - [ ] require fs
+- [x] Do do-what-it-says
+  - [x] require fs
 
 ## Bonus
 - [ ] Output data to log.txt file

@@ -7,6 +7,8 @@ const moment = require(`moment`);
 
 const userInput = process.argv;
 const command = process.argv[2];
+console.log('the user input is ', userInput)
+console.log('the command is ',command)
 
 const concert = (userInput) => {
 	let artist = userInput.length < 4 ? 'Bokassa' : userInput.splice(3, 1);

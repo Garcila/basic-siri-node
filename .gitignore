@@ -1,3 +1,6 @@
-node_modules
-.DS_Store
+# dotenv variables file
 .env
+.env.test
+
+# node modules
+node_modules
