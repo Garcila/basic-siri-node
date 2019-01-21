@@ -4,12 +4,11 @@
   - [x] Spotify
   - [x] OMDB
   - [x] Bands in Town
-- [ ] Install npm packages
+- [x] Install npm packages
   - [x] Axios
   - [x] Node-Spotify-API
   - [x] Moment
   - [x] DotEnv
-  - [ ] inquirer.js - **bonus**
 - [x] Require packages in your liri.js file
 - [x] Require your keys from keys.js
 - [x] Capture user input
@@ -28,7 +27,5 @@
   - [x] require fs
 
 ## Bonus
-- [ ] Output data to log.txt file
-- [ ] Capture user input using inquirer
-  - [ ] First one is command
-  - [ ] Second is the action on the **command**
+- [x] Output data to log.txt file
+- [ ] Refactor - refactor

@@ -1,0 +1,2 @@
+spotify-this-song => {"Artist":"Hozier","Song":"Angel of Small Death and the Codeine Scene","OnSpotify":"https://open.spotify.com/track/6JmSfynzr6E0QllQZNEXEb","Album":"Hozier (Expanded Edition)","Year":"19/09/2014"},
+spotify-this-song => {"Artist":"Mac Miller","Song":"Hurt Feelings","OnSpotify":"https://open.spotify.com/track/5p7GiBZNL1afJJDUrOA6C8","Album":"Swimming","Year":"03/08/2018"},
