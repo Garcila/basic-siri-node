@@ -11,7 +11,6 @@ const command = process.argv[2];
 
 const writeToFile = (instruction, data) => {
 	let logStream = fs.createWriteStream(`./log.txt`, { flags: `a` }, (err) => console.log(err));
-	console.log(data)
 	logStream.write(`${instruction} => ${JSON.stringify(data)},\n`);
 	logStream.end(``);
 };
