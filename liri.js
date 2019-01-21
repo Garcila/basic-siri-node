@@ -1,6 +1,7 @@
 require(`dotenv`).config();
 
 const KEYS = require(`./keys.js`);
+const fs = require('fs');
 const axios = require(`axios`);
 const Spotify = require(`node-spotify-api`);
 const moment = require(`moment`);
@@ -20,7 +21,7 @@ const concert = (userInput) => {
 			Venue: data.venue.name,
 			City: data.venue.city,
 			Country: data.venue.country,
-			Date: moment(data.datetime).format('MM/DD/YYYY')
+			Date: moment(data.datetime).format(`DD/MM/YYYY`)
 		};
 		console.table(nextEvent);
 	});
@@ -69,20 +70,39 @@ const movie = (userInput) => {
 		});
 };
 
-switch (command) {
-	case `concert-this`:
-		concert(userInput);
-		break;
-	case `spotify-this-song`:
-		song(userInput);
-		break;
-	case `movie-this`:
-		movie(userInput);
-		break;
-	case `do-what-it-says`:
-		doWhatItSays();
-		break;
-	default:
-		console.log(`Sorry I do not recognize that command`);
-		break;
+const doWhatItSays = () => {
+	fs.readFile('./random.txt', 'utf8', (err, data) => {
+		if(err) throw err;
+		let command = data.split(',')[0]
+		console.log(command)
+		let query = [];
+		// song function requires an array to be passed as an argument
+		// this satisfies that requirement
+		songToLook[3] = data;
+	
+		song(query);
+	})
 }
+
+const liriIt = command => {
+	switch (command) {
+		case `concert-this`:
+			concert(userInput);
+			break;
+		case `spotify-this-song`:
+			song(userInput);
+			break;
+		case `movie-this`:
+			movie(userInput);
+			break;
+		case `do-what-it-says`:
+			doWhatItSays();
+			break;
+		default:
+			console.log(`Sorry I do not recognize that command`);
+			break;
+	}
+}
+
+liriIt(command);
+

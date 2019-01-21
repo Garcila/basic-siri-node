@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 # dotenv variables file
 .env
 .env.test
 
 # node modules
 node_modules
+=======
+node_modules
+.DS_Store
+.env
+env
+.env
+>>>>>>> ccdb78d1a5eef583d72479cf1861bb4cb9171b7f
