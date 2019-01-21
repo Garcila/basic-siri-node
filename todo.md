@@ -23,8 +23,8 @@
 - [x] Fetch action using Axios
 - [x] Display response in the terminal according to requirements
 - [ ] Create README.MD  
-- [ ] Handle multiple artists in spotify query
-- [ ] Do do-what-it-says
+- [ ] Handle multiple artists or multiple words in all queries
+- [x] Do do-what-it-says
   - [ ] require fs
 
 ## Bonus
