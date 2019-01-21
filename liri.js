@@ -8,16 +8,20 @@ const moment = require(`moment`);
 
 const userInput = process.argv;
 const command = process.argv[2];
-console.log('the user input is ', userInput)
-console.log('the command is ',userInput.slice(3).join(' '))
+
+const writeToFile = (instruction, data) => {
+	let logStream = fs.createWriteStream(`./log.txt`, { flags: `a` }, (err) => console.log(err));
+	console.log(data)
+	logStream.write(`${instruction} => ${JSON.stringify(data)},\n`);
+	logStream.end(``);
+};
 
 const concert = (userInput) => {
 	let artist = userInput.length < 4 ? 'Bokassa' : userInput.slice(3).join(' ');
 	let url = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${KEYS.bandsInTown.key}`;
-	console.log(url)
 	axios.get(url).then((res) => {
 		let data = res.data[0];
-		if(!data)return console.log(`Could not find the band ${artist}`)
+		if (!data) return console.log(`Could not find the band ${artist}`);
 		let nextEvent = {
 			Band: data.lineup[0],
 			Venue: data.venue.name,
@@ -25,6 +29,7 @@ const concert = (userInput) => {
 			Country: data.venue.country,
 			Date: moment(data.datetime).format(`DD/MM/YYYY`)
 		};
+		writeToFile(`concert-this`, nextEvent);
 		console.table(nextEvent);
 	});
 };
@@ -37,7 +42,7 @@ const song = (userInput) => {
 	});
 	spotify.search({ type: `track`, query: `${songTitle}` }).then((res) => {
 		const data = res.tracks.items[0];
-		if(!data) return console.log(`Could not find the song or band named ${songTitle}`)
+		if (!data) return console.log(`Could not find the song or band named ${songTitle}`);
 		let songInfo = {
 			Artist: data.album.artists[0].name,
 			Song: data.name,
@@ -45,6 +50,8 @@ const song = (userInput) => {
 			Album: data.album.name,
 			Year: moment(data.album.release_date).format(`DD/MM/YYYY`)
 		};
+		
+		writeToFile(`spotify-this-song`, songInfo);
 		console.table(songInfo);
 	});
 };
@@ -55,7 +62,7 @@ const movie = (userInput) => {
 	axios
 		.get(url)
 		.then((res) => {
-			if(!res.data.Title) return console.log(`Could not find the movie ${movieTitle}`)
+			if (!res.data.Title) return console.log(`Could not find the movie ${movieTitle}`);
 			let movie = res.data;
 			let movieInfo = {
 				Title: movie.Title,
@@ -67,6 +74,7 @@ const movie = (userInput) => {
 				Plot: movie.Plot,
 				Actors: movie.Actors
 			};
+			writeToFile(`movie-this`, movieInfo);
 			console.table(movieInfo);
 		})
 		.catch((err) => {
@@ -75,20 +83,19 @@ const movie = (userInput) => {
 };
 
 const doWhatItSays = () => {
-	fs.readFile('./random.txt', 'utf8', (err, data) => {
-		if(err) throw err;
-		let command = data.split(',')[0]
-		console.log(command)
+	fs.readFile(`./random.txt`, `utf8`, (err, data) => {
+		if (err) throw err;
+		let command = data.split(',')[0];
 		let query = [];
 		// song function requires an array to be passed as an argument
 		// this satisfies that requirement
 		songToLook[3] = data;
-	
-		song(query);
-	})
-}
 
-const liriIt = command => {
+		song(query);
+	});
+};
+
+const liriIt = (command) => {
 	switch (command) {
 		case `concert-this`:
 			concert(userInput);
@@ -106,7 +113,6 @@ const liriIt = command => {
 			console.log(`Sorry I do not recognize that command`);
 			break;
 	}
-}
+};
 
 liriIt(command);
-
