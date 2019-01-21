@@ -21,7 +21,7 @@
 - [x] Create functions for each case
 - [x] Fetch action using Axios
 - [x] Display response in the terminal according to requirements
-- [ ] Create README.MD  
+- [x] Create README.MD  
 - [x] Handle multiple artists in spotify query
 - [x] Do do-what-it-says
   - [x] require fs

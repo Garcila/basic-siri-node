@@ -15,6 +15,12 @@ const writeToFile = (instruction, data) => {
 	logStream.end(``);
 };
 
+const findRottenTomatoes = (movie) => {
+	let data = movie.Ratings.find(company => company.Source === 'Rotten Tomatoes');
+	let rating = data ? data.Value : 'N/A';
+	return rating;
+};
+
 const concert = (userInput) => {
 	let artist = userInput.length < 4 ? 'Bokassa' : userInput.slice(3).join(' ');
 	let url = `https://rest.bandsintown.com/artists/${artist}/events?app_id=${KEYS.bandsInTown.key}`;
@@ -67,7 +73,9 @@ const movie = (userInput) => {
 				Title: movie.Title,
 				Year: movie.Year,
 				Rating: movie.Rated,
-				RottenTomatoes: movie.Ratings[1].Value,
+
+				//  need function because this field is not always in omdb
+				RottenTomatoes: findRottenTomatoes(movie),
 				Country: movie.Country,
 				Language: movie.Language,
 				Plot: movie.Plot,
