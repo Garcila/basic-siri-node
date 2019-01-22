@@ -1,4 +1,4 @@
-# **LIRI** 🦁
+<center><h1>LIRI 🦁</h1></center> 
 
 <div align="center">
   <!-- Made By -->
