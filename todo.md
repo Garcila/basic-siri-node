@@ -27,5 +27,10 @@
   - [x] require fs
 
 ## Bonus
+
 - [x] Output data to log.txt file
-- [ ] Refactor
+- [x] Refactor
+  - [x] Modularize
+  - [x] Clean up
+  - [x] Comment
+  - [x] Manual Tests
